@@ -2,11 +2,11 @@ import Button from '../components/Button';
 
 const ArticlePage = () => {
   // URLs for online Shrek images. Be aware these may change!
-  const articleHeroImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/shrek_eating.jpg';
-  const onionScienceImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/onions.jpg'; // Re-use onion image
-  const dragonTreatyImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/dragon_fire.jpg';
-  const pussSwordImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/puss_and_shrek.jpg';
-  const talkingDonkeyImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/donkey_portrait.jpg';
+  const articleHeroImageUrl = 'https://media.nbclosangeles.com/2021/10/TLMD-Shrek.jpg?quality=85&strip=all&resize=1200%2C675';
+  const onionScienceImageUrl = 'https://assets.promediateknologi.id/crop/0x0:0x0/1200x0/webp/photo/p3/75/2024/07/10/210903-shrek-ew-955a-d091c2-2954574688.jpg'; // Re-use onion image
+  const dragonTreatyImageUrl = 'https://www.cartoonbrew.com/wp-content/uploads/2024/07/shrek5.jpg';
+  const pussSwordImageUrl = 'https://www.hollywoodreporter.com/wp-content/uploads/2024/07/Shrek-Everett-H-2024.jpg?w=1296&h=730&crop=1';
+  const talkingDonkeyImageUrl = 'https://saccityexpress.com/wp-content/uploads/2025/05/558406E8-6925-47C5-A2A5-0D8618D16859.jpeg';
 
   return (
     <div className="flex w-full flex-col gap-6">

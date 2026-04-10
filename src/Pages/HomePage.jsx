@@ -2,10 +2,10 @@ import Button from '../components/Button';
 
 const HomePage = () => {
   // URLs for online Shrek images. Be aware these may change!
-  const mainHeroImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/hero_shrek.jpg';
-  const donkeyImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/donkey.jpg';
-  const fionaImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/fiona_ogre.jpg';
-  const pussImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/puss_in_boots.jpg';
+  const mainHeroImageUrl = 'https://saccityexpress.com/wp-content/uploads/2025/05/558406E8-6925-47C5-A2A5-0D8618D16859.jpeg';
+  const donkeyImageUrl = 'https://www.thefactsite.com/wp-content/uploads/2012/05/shrek-facts.jpg';
+  const fionaImageUrl = 'https://media.nbclosangeles.com/2021/10/TLMD-Shrek.jpg?quality=85&strip=all&resize=1200%2C675';
+  const pussImageUrl = 'https://assets.promediateknologi.id/crop/0x0:0x0/1200x0/webp/photo/p3/75/2024/07/10/210903-shrek-ew-955a-d091c2-2954574688.jpg';
 
   return (
     <div className="flex w-full flex-col gap-6">

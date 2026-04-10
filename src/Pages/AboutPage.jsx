@@ -2,10 +2,10 @@ import Button from '../components/Button';
 
 const AboutPage = () => {
   // URLs for online Shrek images. Be aware these may change!
-  const aboutHeroImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/shrek_portrait.jpg';
-  const onionImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/onions.jpg';
-  const dragonImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/dragon.jpg';
-  const castleImageUrl = 'https://raw.githubusercontent.com/swamp-tales/assets/main/far_far_away.jpg';
+  const aboutHeroImageUrl = 'https://www.cartoonbrew.com/wp-content/uploads/2024/07/shrek5.jpg';
+  const onionImageUrl = 'https://www.hollywoodreporter.com/wp-content/uploads/2024/07/Shrek-Everett-H-2024.jpg?w=1296&h=730&crop=1';
+  const dragonImageUrl = 'https://saccityexpress.com/wp-content/uploads/2025/05/558406E8-6925-47C5-A2A5-0D8618D16859.jpeg';
+  const castleImageUrl = 'https://www.thefactsite.com/wp-content/uploads/2012/05/shrek-facts.jpg';
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -139,8 +139,12 @@ const AboutPage = () => {
                   className="aspect-square w-full object-cover"
                 />
               </div>
-              <div className="aspect-square rounded-[1.25rem] bg-[#E1EDD9]">
-                {/* Empty placeholder to keep the layout */}
+              <div className="overflow-hidden rounded-[1.25rem] bg-[#E1EDD9]">
+                <img
+                  src="https://static0.polygonimages.com/wordpress/wp-content/uploads/chorus/uploads/chorus_asset/file/22512212/shrek4_disneyscreencaps.com_675.jpg?w=1600&h=900&fit=crop"
+                  alt="Shrek Roar"
+                  className="aspect-square w-full object-cover"
+                />
               </div>
             </div>
             <Button className="mt-5">Explore All Scenes</Button>

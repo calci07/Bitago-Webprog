@@ -9,7 +9,7 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-3">
           
           <img
-            src="../assets/shrek.jpg" 
+            src="https://i.redd.it/ebd200mjenm91.jpg" 
             alt="The Swamp Chronicles Logo"
             className="h-10 w-10 rounded-full border-2 border-[#5D8A37] object-cover" // A green border
           />
