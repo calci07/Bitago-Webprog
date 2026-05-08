@@ -2,7 +2,6 @@ import Button from '../components/Button';
 
 const ArticlePage = () => {
   // URLs for online Shrek images. Be aware these may change!
-  const articleHeroImageUrl = 'https://media.nbclosangeles.com/2021/10/TLMD-Shrek.jpg?quality=85&strip=all&resize=1200%2C675';
   const onionScienceImageUrl = 'https://assets.promediateknologi.id/crop/0x0:0x0/1200x0/webp/photo/p3/75/2024/07/10/210903-shrek-ew-955a-d091c2-2954574688.jpg'; // Re-use onion image
   const dragonTreatyImageUrl = 'https://www.cartoonbrew.com/wp-content/uploads/2024/07/shrek5.jpg';
   const pussSwordImageUrl = 'https://www.hollywoodreporter.com/wp-content/uploads/2024/07/Shrek-Everett-H-2024.jpg?w=1296&h=730&crop=1';

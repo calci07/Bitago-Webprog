@@ -1,3 +1,4 @@
+import Button from './Button';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/shrek.jpg';
 
@@ -7,11 +8,10 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         {/* Logo and Brand */}
         <Link to="/" className="flex items-center gap-3">
-          
           <img
-            src="https://i.redd.it/ebd200mjenm91.jpg" 
+            src={logo}
             alt="The Swamp Chronicles Logo"
-            className="h-10 w-10 rounded-full border-2 border-[#5D8A37] object-cover" // A green border
+            className="h-10 w-10 rounded-full border-2 border-[#5D8A37] object-cover"
           />
           <span className="text-2xl font-bold tracking-tight text-zinc-900">
             The Swamp Chronicles
@@ -50,8 +50,14 @@ const Navbar = () => {
           >
             Articles
           </NavLink>
+          <Button
+            to="/auth/signin"
+            variant="primary"
+            className="px-4 py-2 text-[11px] uppercase tracking-[0.2em]"
+          >
+            Sign In
+          </Button>
         </div>
-      
       </div>
     </nav>
   );

@@ -1,36 +1,59 @@
 
+import { Navigate, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AuthLayout from './components/AuthLayout';
 import Layout from './components/Layout';
-import AboutPage from './pages/AboutPage';
-import ArticleListPage from './pages/ArticleListPage';
-import ArticlePage from './pages/ArticlePage';
-import HomePage from './pages/HomePage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AboutPage from './Pages/AboutPage';
+import ArticleListPage from './Pages/ArticleListPage';
+import ArticlePage from './Pages/ArticlePage';
+import HomePage from './Pages/HomePage';
 import NotFoundPage from './Pages/NotFoundPage';
+import SignInPage from './Pages/SignInPage';
+import SignUpPage from './Pages/SignUpPage';
 
-const routes = [{
-  path: '/',
-  element: <Layout />,
-  // Error element
-  errorElement: <NotFoundPage />,
-  children: [{
-    // Path declaration
+const routes = [
+  {
     path: '/',
-    element: <HomePage />
+    element: <Layout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
+      },
+      {
+        path: 'articles',
+        element: <ArticleListPage />,
+      },
+      {
+        path: 'articles/:name',
+        element: <ArticlePage />,
+      },
+    ],
   },
   {
-    path: '/about',
-    element: <AboutPage />
+    path: '/auth',
+    element: <AuthLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        index: true,
+        element: <Navigate replace to="signin" />,
+      },
+      {
+        path: 'signin',
+        element: <SignInPage />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+      },
+    ],
   },
-  {
-    path: '/articles',
-    element: <ArticleListPage />
-  },
-  {
-    path: '/articles/:name', // -->articles/learn-react
-    element: <ArticlePage />
-  }
-  ]
-}]
+];
 
 const router = createBrowserRouter(routes);
 
