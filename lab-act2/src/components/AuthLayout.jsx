@@ -2,49 +2,49 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 const authScenes = {
   signin: {
-    eyebrow: 'Returning reader',
-    title: 'Slip back into the swamp without losing the calm.',
+    eyebrow: 'Welcome back',
+    title: 'Your next story is waiting right where you left it.',
     description:
-      'A focused sign-in flow for readers who want quick access to saved stories, fairytale updates, and the latest ogre dispatches.',
+      'Sign in to revisit saved reads, catch the latest headlines from Far Far Away, and stay connected to every new chapter in the swamp.',
     highlights: [
       {
-        title: 'Focused form',
+        title: 'Fast access',
         copy:
-          'The card stays compact and readable so the login action feels immediate on both desktop and mobile screens.',
+          'A clean sign-in flow gets readers back into their account quickly, whether they are checking in from desktop or mobile.',
       },
       {
-        title: 'Reusable pieces',
+        title: 'Reader-first experience',
         copy:
-          'Shared layout, field, and card components keep the auth pages component-based instead of duplicating markup.',
+          'Saved articles, returning sessions, and a familiar experience make it easy to pick up the story without friction.',
       },
     ],
     metrics: [
-      { value: '02', label: 'Auth Routes' },
-      { value: '01', label: 'Navbar Entry' },
-      { value: '100%', label: 'Shared Shell' },
+      { value: '24/7', label: 'Account Access' },
+      { value: 'Fresh', label: 'New Releases' },
+      { value: 'Saved', label: 'Favorite Reads' },
     ],
   },
   signup: {
-    eyebrow: 'Fresh account',
-    title: 'Join the chronicle and build your own corner of the swamp.',
+    eyebrow: 'New reader',
+    title: 'Create your account and make the swamp your own.',
     description:
-      'The sign-up view uses the same shell but opens up into a slightly broader form so new readers can register without leaving the site tone behind.',
+      'Join The Swamp Chronicles to save your favorite stories, follow the latest releases, and enjoy a smoother reading experience every time you return.',
     highlights: [
       {
-        title: 'Clear onboarding',
+        title: 'Save what you love',
         copy:
-          'Grouped name fields, direct helper text, and a simple consent block make the registration flow easier to scan.',
+          'Build your personal reading list so the articles, characters, and updates you care about are always easy to find.',
       },
       {
-        title: 'Consistent design',
+        title: 'Stay in the loop',
         copy:
-          'Both auth pages stay visually connected to the green-and-cream aesthetic already used across the existing site.',
+          'Get timely updates on fresh stories, featured posts, and the latest dispatches from the world of Far Far Away.',
       },
     ],
     metrics: [
-      { value: '04', label: 'Primary Fields' },
-      { value: '02', label: 'Secondary Actions' },
-      { value: '01', label: 'Unified Theme' },
+      { value: '2 min', label: 'Typical Setup' },
+      { value: 'Fresh', label: 'Story Alerts' },
+      { value: 'Saved', label: 'Reading List' },
     ],
   },
 };

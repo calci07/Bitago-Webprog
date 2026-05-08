@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthCard from '../components/AuthCard';
 import AuthField from '../components/AuthField';
 import Button from '../components/Button';
@@ -6,20 +6,23 @@ import Button from '../components/Button';
 const actionButtonClassName = 'w-full px-6 py-3 text-[0.72rem] uppercase tracking-[0.2em]';
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    navigate('/', { replace: true });
   };
 
   return (
     <AuthCard
-      eyebrow="Member access"
-      title="Log back in and pick up where the story paused."
-      description="This revised sign-in page keeps the swamp identity, trims the distractions, and gives returning readers one obvious path back into the site."
+      eyebrow="Sign in"
+      title="Welcome back to The Swamp Chronicles."
+      description="Access your saved reads, personalized updates, and the latest stories from the swamp in just a few clicks."
       footer={
         <>
-          New to the swamp?{' '}
+          New to The Swamp Chronicles?{' '}
           <Link className="font-semibold text-[#3f6223] transition hover:text-[#2f4a19]" to="/auth/signup">
-            Create an account.
+            Create your account.
           </Link>
         </>
       }
@@ -29,14 +32,14 @@ const SignInPage = () => {
           autoComplete="email"
           id="signin-email"
           label="Email Address"
-          placeholder="name@swampmail.com"
+          placeholder="you@example.com"
           required
           type="email"
         />
 
         <AuthField
           autoComplete="current-password"
-          helperText="Use the same password you created for your account."
+          helperText="Enter the password linked to your account."
           id="signin-password"
           label="Password"
           placeholder="Enter your password"
@@ -50,7 +53,7 @@ const SignInPage = () => {
             <span>Keep me signed in on this device</span>
           </label>
           <Link className="font-semibold text-[#3f6223] transition hover:text-[#2f4a19]" to="/">
-            Back to home
+            Back to homepage
           </Link>
         </div>
 
