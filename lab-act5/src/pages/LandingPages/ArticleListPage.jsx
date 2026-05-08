@@ -1,0 +1,38 @@
+import { Button, Paper, Stack, Typography } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+import { publicArticles } from './articles'
+
+function ArticleListPage() {
+  return (
+    <Stack spacing={3}>
+      <Paper sx={{ p: 4, borderRadius: 4 }}>
+        <Stack spacing={1.5}>
+          <Typography variant="h4">Insights & Guides</Typography>
+          <Typography color="text.secondary">
+            Editorial notes and product guides covering the dashboard
+            architecture, reporting strategy, and directory experience.
+          </Typography>
+        </Stack>
+      </Paper>
+
+      {publicArticles.map((article) => (
+        <Paper key={article.name} sx={{ p: 3, borderRadius: 4 }}>
+          <Stack spacing={1.5}>
+            <Typography variant="h6">{article.title}</Typography>
+            <Typography color="text.secondary">{article.summary}</Typography>
+            <Button
+              component={RouterLink}
+              to={`/articles/${article.name}`}
+              variant="text"
+              sx={{ alignSelf: 'flex-start' }}
+            >
+              Open article
+            </Button>
+          </Stack>
+        </Paper>
+      ))}
+    </Stack>
+  )
+}
+
+export default ArticleListPage
