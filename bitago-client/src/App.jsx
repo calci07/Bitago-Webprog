@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-// HomePage Structure
+
 import Layout from './layouts/Layout';
 import ProductPage from './pages/LandingPages/ProductPage';
 import HomePage from './pages/LandingPages/HomePage';
 import AboutPage from './pages/LandingPages/AboutPage';
 import ProductListPage from './pages/LandingPages/ProductListPage';
 
-// Auth Pages Structure
+
 import AuthLayout from './layouts/AuthLayout';
 import SignInPage from './pages/AuthPages/SignInPage';
 import SignUpPage from './pages/AuthPages/SignUpPage';

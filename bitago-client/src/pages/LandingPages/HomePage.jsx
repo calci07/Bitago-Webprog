@@ -52,7 +52,7 @@ const HomePage = () => {
                         </p>
                     </div>
                     <div className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
-                        <p className="text-2xl font-bold text-zinc-900">06</p>
+                        <p className="text-2xl font-bold text-zinc-900">08</p>
                         <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-500">
                             Categories
                         </p>
@@ -82,8 +82,13 @@ const HomePage = () => {
 
                 <div className="grid gap-4 md:grid-cols-3">
                     <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4">
-                        <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                            <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+                        <div className="aspect-4/3 overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXNknTE0FGfK_qwdPedqKEvy0bZQ1Vqs2DgQ&s"
+                                alt="Campus tote bag"
+                                loading="lazy"
+                                className="h-full w-full object-cover"
+                            />
                         </div>
                         <h3 className="mt-4 text-lg font-semibold text-zinc-900">Daily Essentials</h3>
                         <p className="mt-3 text-sm leading-6 text-zinc-600">
@@ -93,8 +98,13 @@ const HomePage = () => {
                     </article>
 
                     <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4">
-                        <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                            <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+                        <div className="aspect-4/3 overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                            <img
+                                src="https://www.shutterstock.com/image-photo/five-blank-sticky-notes-isolated-260nw-2672862663.jpg"
+                                alt="Sticky notes for study planning"
+                                loading="lazy"
+                                className="h-full w-full object-cover"
+                            />
                         </div>
                         <h3 className="mt-4 text-lg font-semibold text-zinc-900">Study Supplies</h3>
                         <p className="mt-3 text-sm leading-6 text-zinc-600">
@@ -104,8 +114,13 @@ const HomePage = () => {
                     </article>
 
                     <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4">
-                        <div className="flex aspect-4/3 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                            <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+                        <div className="aspect-4/3 overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBh-jwEkcKGlLoBZA9NtfiGNSKW4R7KHiQuQ&s"
+                                alt="Campus hoodie jacket"
+                                loading="lazy"
+                                className="h-full w-full object-cover"
+                            />
                         </div>
                         <h3 className="mt-4 text-lg font-semibold text-zinc-900">Campus Apparel</h3>
                         <p className="mt-3 text-sm leading-6 text-zinc-600">

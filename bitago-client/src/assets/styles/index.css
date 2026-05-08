@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+:root {
+  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --font-display: 'Sora', 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply text-zinc-900 antialiased;
+    font-family: var(--font-body);
+    background: radial-gradient(circle at top left, #e5ecf6 0%, #f3f4f6 45%, #f9fafb 100%);
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  a,
+  button {
+    @apply transition-colors duration-200;
+  }
+}

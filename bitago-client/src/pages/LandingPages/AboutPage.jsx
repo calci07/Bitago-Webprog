@@ -1,5 +1,5 @@
 import Button from '../../components/Button';
-import logo from '../../assets/img/nubdexchange_logo.png';
+import banner from '../../assets/img/nu_bulldogex_banner.jpg';
 
 const AboutPage = () => {
   return (
@@ -7,8 +7,12 @@ const AboutPage = () => {
       <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <div className="rounded-3xl border-2 border-dashed border-zinc-300 bg-zinc-100 p-6">
-            <div className="flex min-h-72 items-center justify-center rounded-[1.25rem] bg-zinc-200">
-              <img src={logo} alt="BulldogEx" className="h-32 w-32 rounded-full border-2 border-zinc-900 bg-zinc-50 object-contain" />
+            <div className="min-h-72 overflow-hidden rounded-[1.25rem] bg-zinc-200">
+              <img
+                src={banner}
+                alt="BulldogEx campus storefront banner"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
 
@@ -49,7 +53,7 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-5">
-            <p className="text-2xl font-bold text-zinc-900">06</p>
+            <p className="text-2xl font-bold text-zinc-900">08</p>
             <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-zinc-500">
               Categories
             </p>
@@ -106,17 +110,37 @@ const AboutPage = () => {
               Category Grid
             </p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div className="flex aspect-square items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+              <div className="aspect-square overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBh-jwEkcKGlLoBZA9NtfiGNSKW4R7KHiQuQ&s"
+                  alt="Tote bag category preview"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="flex aspect-square items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+              <div className="aspect-square overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP5PdBna15zztxmonRqsLlLjcQHnY-Pyh45w&s"
+                  alt="Tumbler category preview"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="flex aspect-square items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+              <div className="aspect-square overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                <img
+                  src="https://down-ph.img.susercontent.com/file/ph-11134207-7r98y-lwb7rkz9jk7837"
+                  alt="ID lanyard category preview"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="flex aspect-square items-center justify-center rounded-[1.25rem] bg-zinc-200">
-                <div className="h-12 w-12 border-2 border-zinc-300 bg-zinc-100" />
+              <div className="aspect-square overflow-hidden rounded-[1.25rem] bg-zinc-200">
+                <img
+                  src="https://img.lazcdn.com/g/p/3984486c91397513fd74462026090636.jpg_960x960q80.jpg_.webp"
+                  alt="Study lamp category preview"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
             <Button to="/products" className="mt-5">View Products</Button>
