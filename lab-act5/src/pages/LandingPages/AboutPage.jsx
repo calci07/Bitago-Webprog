@@ -4,24 +4,26 @@ function AboutPage() {
   return (
     <Paper sx={{ p: 4, borderRadius: 4 }}>
       <Stack spacing={2}>
-        <Typography variant="h4">About The Platform</Typography>
+        <Typography variant="h4">About The Workspace</Typography>
         <Typography color="text.secondary">
-          This platform presents a compact public layer and a richer internal
-          dashboard experience. The public pages introduce the product, explain
-          the reporting model, and provide reference material for reviewers,
-          collaborators, and first-time users.
+          This workspace helps operations teams understand what is happening
+          across people, activity, and performance data. It brings the everyday
+          signals of a team into one clear view, making it easier to notice
+          change, prioritize follow-up, and keep decisions grounded in current
+          information.
         </Typography>
         <Typography color="text.secondary">
-          Behind that layer, the dashboard is organized around practical
-          operational questions: what changed, where attention is needed, and
-          which records require follow-up. Material UI components were chosen to
-          keep dense data views consistent, legible, and quick to navigate.
+          The dashboard is shaped around practical questions: which numbers moved,
+          where attention is needed, and which records deserve a closer review.
+          Summaries provide a quick read of the day, while reports and directory
+          details support deeper investigation when a trend or person needs more
+          context.
         </Typography>
         <Typography color="text.secondary">
-          The result is a structured analytics workspace that balances overview,
-          detail, and maintainability. Each route has a clear responsibility,
-          the navigation remains lightweight, and the reporting screens stay
-          focused on actionable information.
+          The result is an analytics workspace that turns routine reporting into
+          a steadier decision process. Instead of treating data as separate
+          tables, charts, and records, it connects those pieces into a picture
+          teams can use to understand progress, risk, and next steps.
         </Typography>
       </Stack>
     </Paper>

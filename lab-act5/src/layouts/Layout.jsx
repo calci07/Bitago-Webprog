@@ -43,15 +43,14 @@ function Layout() {
                 Operations Analytics Workspace
               </Typography>
               <Typography variant="h5">
-                Product overview, reference material, and implementation notes
-                for the analytics platform.
+                A practical view of team activity, performance movement, and
+                the records that need attention.
               </Typography>
               <Typography color="text.secondary" sx={{ maxWidth: 820 }}>
-                This public section gives stakeholders a concise view of the
-                platform, the reporting model, and the decisions behind the
-                dashboard experience. It supports the main application without
-                duplicating the interactive workflows inside the reporting
-                interface.
+                Use the workspace to move from broad operational signals to
+                specific follow-up decisions. Summaries, reports, directory
+                records, and location context work together so teams can see what
+                changed and decide what to do next.
               </Typography>
             </Stack>
           </Paper>

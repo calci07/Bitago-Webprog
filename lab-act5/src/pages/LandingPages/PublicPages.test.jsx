@@ -23,8 +23,9 @@ describe('public pages', () => {
       screen.getByRole('heading', { name: /operations dashboard overview/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(/unified analytics workspace for monitoring activity/i),
+      screen.getByText(/focused workspace for keeping track of team activity/i),
     ).toBeInTheDocument()
+    expect(screen.getByText(/know what needs attention/i)).toBeInTheDocument()
   })
 
   it('shows production article copy for a routed article page', () => {
@@ -36,10 +37,10 @@ describe('public pages', () => {
     )
 
     expect(
-      screen.getByRole('heading', { name: /executive dashboard design/i }),
+      screen.getByRole('heading', { name: /reading the daily picture/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(/top-line metrics, chart-driven reporting, tabular records, and geographic context/i),
+      screen.getByText(/total users, average profile details, flexible work patterns/i),
     ).toBeInTheDocument()
   })
 
@@ -47,7 +48,7 @@ describe('public pages', () => {
     renderWithRouter(<ArticleListPage />)
 
     expect(
-      screen.getByText(/editorial notes and product guides covering the dashboard architecture/i),
+      screen.getByText(/practical guidance for reading operational data/i),
     ).toBeInTheDocument()
     expect(screen.getAllByRole('link', { name: /open article/i })).toHaveLength(3)
   })

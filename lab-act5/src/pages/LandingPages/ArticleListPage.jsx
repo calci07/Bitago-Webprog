@@ -9,8 +9,8 @@ function ArticleListPage() {
         <Stack spacing={1.5}>
           <Typography variant="h4">Insights & Guides</Typography>
           <Typography color="text.secondary">
-            Editorial notes and product guides covering the dashboard
-            architecture, reporting strategy, and directory experience.
+            Practical guidance for reading operational data, spotting patterns,
+            and turning team records into clearer follow-up decisions.
           </Typography>
         </Stack>
       </Paper>

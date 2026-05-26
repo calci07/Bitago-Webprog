@@ -1,50 +1,50 @@
 export const publicArticles = [
   {
     name: 'dashboard-overview',
-    title: 'Executive Dashboard Design',
+    title: 'Reading The Daily Picture',
     summary:
-      'How the dashboard brings together high-level metrics, visual reporting, record-level detail, and location context in a single decision surface.',
+      'How leaders can use daily activity, profile, work style, and location signals to understand where the team stands right now.',
     body: [
-      'The dashboard serves as the primary operating surface for the platform. It combines top-line metrics, chart-driven reporting, tabular records, and geographic context so users can move from signal to detail without leaving the page.',
-      'The opening summary row is designed for rapid orientation. It answers immediate questions around volume, average profile characteristics, and flexible or remote activity, giving teams a stable baseline before they inspect deeper trends.',
-      'Visual modules add interpretation without overwhelming the layout. Comparative charts surface movement and distribution, while the map anchors the data in a real-world location, helping the overall experience feel grounded and actionable.',
+      'A useful operations dashboard starts with the current picture. Total users, average profile details, flexible work patterns, and location signals give teams a quick sense of scale before they dig into individual records.',
+      'Those first numbers are not meant to answer every question. They help leaders decide where to look next: a changing trend, a location with unusual activity, or a group of records that may need a follow-up conversation.',
+      'The value comes from connecting signals. Metrics show the scale of what is happening, reports explain movement over time, and location context helps teams understand whether a pattern is isolated or part of a broader operational shift.',
     ],
     takeaways: [
-      'Lead with metrics that establish context quickly.',
-      'Use charts to explain movement, not to repeat raw tables.',
-      'Keep location and record detail close when they support the same decision flow.',
+      'Start with a clear baseline before interpreting deeper trends.',
+      'Look for changes that point to a practical follow-up action.',
+      'Use location and record details to confirm what the summary numbers suggest.',
     ],
   },
   {
     name: 'reports-visualization',
-    title: 'Reporting Experience Strategy',
+    title: 'Turning Trends Into Decisions',
     summary:
-      'Why the reporting route separates trend analysis from the main dashboard and gives comparative views room to breathe.',
+      'How trend views help teams move beyond one-day snapshots and understand whether performance signals are improving, slipping, or holding steady.',
     body: [
-      'The reports area is built for deeper analysis. While the main dashboard focuses on rapid orientation, the reporting route gives trend lines, comparisons, and performance summaries enough space to support interpretation instead of just display.',
-      'That separation improves both readability and pacing. Comparative visuals can become noisy when they compete with every other module on the page, so moving them into a dedicated route keeps the main dashboard lighter and the reporting experience more deliberate.',
-      'From a product perspective, it also improves maintenance. Teams can evolve reporting views independently without disrupting the operational screen that users rely on for day-to-day monitoring.',
+      'Daily summaries are useful, but trends show whether today is part of a pattern. Reporting helps teams compare activity over time, identify movement across groups, and separate normal variation from signals that deserve attention.',
+      'Good reporting should create a short path from observation to decision. When a line rises, a distribution shifts, or a comparison widens, the next question should be clear: what changed, who is affected, and what should happen next?',
+      'For teams reviewing operations regularly, reports also create a shared record of progress. They make it easier to discuss performance with the same facts in view and to return to the evidence behind earlier decisions.',
     ],
     takeaways: [
-      'Keep primary dashboards focused on orientation.',
-      'Use secondary routes for analysis and narrative.',
-      'Let reporting evolve without destabilizing the main workspace.',
+      'Use trends to distinguish a momentary change from a lasting pattern.',
+      'Connect every chart back to a decision or follow-up question.',
+      'Review reports consistently so performance conversations stay grounded.',
     ],
   },
   {
     name: 'users-table-management',
-    title: 'User Directory Experience',
+    title: 'Following Up With The Right Records',
     summary:
-      'Why the directory experience is centered on a structured data grid and how that supports faster review across people, teams, and status signals.',
+      'How a structured user directory helps teams compare people, locations, and status signals when a closer review is needed.',
     body: [
-      'The users route is intentionally directory-first. A data grid is the most effective pattern when the core task is comparing records across several fields such as identity, team, location, age, and current status.',
-      'This route complements the summary dashboard by exposing a fuller reference view. Rather than compressing every detail into charts, it treats the grid as the source of truth for structured record review and supports it with lightweight status summaries.',
-      'A production-ready directory should prioritize legibility, stable columns, and status cues that help someone act quickly without reading every row in sequence.',
+      'When a metric changes, teams often need to know which records sit behind it. A structured directory gives reviewers a dependable place to compare names, teams, locations, ages, and status information without jumping between disconnected sources.',
+      'The directory works best as a follow-up tool. Summary numbers point to a possible issue, reports explain the trend, and individual records help teams understand who may need outreach, clarification, or support.',
+      'Clear record review reduces guesswork. When status language is consistent and key details are easy to scan, teams can spend less time hunting for context and more time deciding the right next step.',
     ],
     takeaways: [
-      'Use a grid when cross-record comparison is the primary task.',
-      'Add concise rollups above dense datasets.',
-      'Keep labels and status language consistent across the product.',
+      'Use the directory to verify the people or teams behind a signal.',
+      'Compare records with the same fields so follow-up is consistent.',
+      'Keep status labels clear enough to support quick action.',
     ],
   },
 ]
