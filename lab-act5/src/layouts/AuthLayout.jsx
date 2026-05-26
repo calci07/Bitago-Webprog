@@ -18,9 +18,8 @@ function AuthLayout() {
           <Stack spacing={1} sx={{ mb: 3 }}>
             <Typography variant="h4">Account Access</Typography>
             <Typography color="text.secondary">
-              These forms validate required inputs before the user is allowed to
-              continue to the dashboard. Submit only proceeds when the entered
-              details satisfy the client-side checks.
+              Sign in to continue managing users, reports, and workspace
+              activity from one secure dashboard.
             </Typography>
           </Stack>
           <Outlet />

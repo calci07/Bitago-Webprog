@@ -1,3 +1,6 @@
+import { useRef } from 'react'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
@@ -16,6 +19,7 @@ import {
   reportLineSeries,
   reportMonths,
 } from './data'
+import { createReportPrintMarkup } from './reportsPrint'
 
 const insights = [
   {
@@ -33,100 +37,162 @@ const insights = [
 ]
 
 function ReportsPage() {
+  const reportRef = useRef(null)
+
+  const handlePrint = () => {
+    const reportContent = reportRef.current?.outerHTML
+
+    if (!reportContent) {
+      return
+    }
+
+    const printWindow = window.open('', '_blank', 'width=1200,height=800')
+
+    if (!printWindow) {
+      return
+    }
+
+    const stylesMarkup = Array.from(
+      document.querySelectorAll('style, link[rel="stylesheet"]'),
+    )
+      .map((node) => node.outerHTML)
+      .join('')
+    const preparedAt = new Intl.DateTimeFormat('en-US', {
+      dateStyle: 'long',
+      timeStyle: 'short',
+    }).format(new Date())
+
+    printWindow.document.open()
+    printWindow.document.write(
+      createReportPrintMarkup({
+        stylesMarkup,
+        reportContent,
+        preparedAt,
+      }),
+    )
+    printWindow.document.close()
+    printWindow.focus()
+    printWindow.print()
+  }
+
   return (
     <Stack spacing={3}>
-      <Typography variant="h4">Reports</Typography>
-
-      <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
-        <Card sx={{ flex: 1, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6">Forecast Accuracy</Typography>
-            <Gauge width={190} height={130} value={86} valueMin={0} valueMax={100} />
-          </CardContent>
-        </Card>
-        <Card sx={{ flex: 1, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6">Pipeline Completion</Typography>
-            <Gauge width={190} height={130} value={72} valueMin={0} valueMax={100} />
-          </CardContent>
-        </Card>
-        <Card sx={{ flex: 1, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6">Review Status</Typography>
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mt: 2 }}>
-              <Chip label="Board ready" color="success" />
-              <Chip label="Updated today" color="primary" variant="outlined" />
-            </Stack>
-          </CardContent>
-        </Card>
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        justifyContent="space-between"
+        alignItems={{ xs: 'flex-start', sm: 'center' }}
+        spacing={2}
+      >
+        <Box>
+          <Typography variant="h4" gutterBottom>
+            Reports
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Report analytics overview showing generated reports, category breakdown, and
+            completion performance.
+          </Typography>
+        </Box>
+        <Button variant="contained" onClick={handlePrint}>
+          Print Report
+        </Button>
       </Stack>
 
-      <Stack direction={{ xs: 'column', xl: 'row' }} spacing={3}>
-        <Card sx={{ flex: 2, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Monthly Revenue
-            </Typography>
-            <LineChart
-              xAxis={[{ scaleType: 'point', data: reportMonths }]}
-              series={[{ data: reportLineSeries, label: 'Revenue' }]}
-              height={300}
-            />
-          </CardContent>
-        </Card>
+      <Stack ref={reportRef} className="report-content" spacing={3}>
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+          <Card sx={{ flex: 1, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6">Forecast Accuracy</Typography>
+              <Gauge width={190} height={130} value={86} valueMin={0} valueMax={100} />
+            </CardContent>
+          </Card>
+          <Card sx={{ flex: 1, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6">Pipeline Completion</Typography>
+              <Gauge width={190} height={130} value={72} valueMin={0} valueMax={100} />
+            </CardContent>
+          </Card>
+          <Card sx={{ flex: 1, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6">Review Status</Typography>
+              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mt: 2 }}>
+                <Chip label="Board ready" color="success" />
+                <Chip label="Updated today" color="primary" variant="outlined" />
+              </Stack>
+            </CardContent>
+          </Card>
+        </Stack>
 
-        <Card sx={{ flex: 1, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Department Mix
-            </Typography>
-            <PieChart
-              series={[
-                {
-                  data: departmentMix,
-                  innerRadius: 30,
-                  paddingAngle: 3,
-                  cornerRadius: 4,
-                },
-              ]}
-              width={250}
-              height={260}
-            />
-          </CardContent>
-        </Card>
-      </Stack>
+        <Stack direction={{ xs: 'column', xl: 'row' }} spacing={3}>
+          <Card sx={{ flex: 2, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Monthly Report Output
+              </Typography>
+              <LineChart
+                xAxis={[{ scaleType: 'point', data: reportMonths }]}
+                series={[{ data: reportLineSeries, label: 'Generated' }]}
+                height={300}
+              />
+            </CardContent>
+          </Card>
 
-      <Stack direction={{ xs: 'column', xl: 'row' }} spacing={3}>
-        <Card sx={{ flex: 2, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Campaign Performance
-            </Typography>
-            <BarChart
-              xAxis={[{ scaleType: 'band', data: ['Q1', 'Q2', 'Q3', 'Q4'] }]}
-              series={reportBarSeries}
-              height={280}
-            />
-          </CardContent>
-        </Card>
-        <Card sx={{ flex: 1, borderRadius: 4 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Key Insights
-            </Typography>
-            <List disablePadding>
-              {insights.map((insight) => (
-                <ListItem key={insight.title} disableGutters sx={{ alignItems: 'flex-start', py: 1 }}>
-                  <ListItemText
-                    primary={insight.title}
-                    secondary={insight.body}
-                    primaryTypographyProps={{ fontWeight: 600 }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </CardContent>
-        </Card>
+          <Card sx={{ flex: 1, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Report Category Share
+              </Typography>
+              <PieChart
+                series={[
+                  {
+                    data: departmentMix,
+                    innerRadius: 30,
+                    paddingAngle: 3,
+                    cornerRadius: 4,
+                  },
+                ]}
+                width={250}
+                height={260}
+              />
+            </CardContent>
+          </Card>
+        </Stack>
+
+        <Stack direction={{ xs: 'column', xl: 'row' }} spacing={3}>
+          <Card sx={{ flex: 2, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Report Category Performance
+              </Typography>
+              <BarChart
+                xAxis={[{ scaleType: 'band', data: ['Q1', 'Q2', 'Q3', 'Q4'] }]}
+                series={reportBarSeries}
+                height={280}
+              />
+            </CardContent>
+          </Card>
+          <Card sx={{ flex: 1, borderRadius: 4 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Key Insights
+              </Typography>
+              <List disablePadding>
+                {insights.map((insight) => (
+                  <ListItem
+                    key={insight.title}
+                    disableGutters
+                    sx={{ alignItems: 'flex-start', py: 1 }}
+                  >
+                    <ListItemText
+                      primary={insight.title}
+                      secondary={insight.body}
+                      primaryTypographyProps={{ fontWeight: 600 }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </CardContent>
+          </Card>
+        </Stack>
       </Stack>
     </Stack>
   )

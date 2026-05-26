@@ -29,6 +29,7 @@ function renderWithProviders(ui) {
 describe('auth forms', () => {
   beforeEach(() => {
     navigateMock.mockReset()
+    sessionStorage.clear()
   })
 
   it('blocks sign in when required fields are empty', async () => {
@@ -39,20 +40,36 @@ describe('auth forms', () => {
     await user.click(screen.getByRole('button', { name: /sign in/i }))
 
     expect(
-      screen.getByText(/enter your email and password to continue/i),
+      screen.getByText(/enter your username\/email and password to continue/i),
     ).toBeInTheDocument()
     expect(navigateMock).not.toHaveBeenCalled()
   })
 
-  it('redirects to the dashboard after valid sign in input', async () => {
+  it('blocks sign in when credentials do not match a seeded user', async () => {
     const user = userEvent.setup()
 
     renderWithProviders(<SignInPage />)
 
-    await user.type(screen.getByLabelText(/email/i), 'student@example.com')
-    await user.type(screen.getByLabelText(/^password$/i), 'SecurePass123')
+    await user.type(screen.getByLabelText(/username or email/i), 'aliciareyes')
+    await user.type(screen.getByLabelText(/^password$/i), 'WrongPass123')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
 
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      /username\/email or password is incorrect/i,
+    )
+    expect(navigateMock).not.toHaveBeenCalled()
+  })
+
+  it('redirects to the dashboard after valid seeded sign in credentials', async () => {
+    const user = userEvent.setup()
+
+    renderWithProviders(<SignInPage />)
+
+    await user.type(screen.getByLabelText(/username or email/i), 'aliciareyes')
+    await user.type(screen.getByLabelText(/^password$/i), 'Alicia123!')
+    await user.click(screen.getByRole('button', { name: /sign in/i }))
+
+    expect(sessionStorage.getItem('roles-webapp-session')).toContain('aliciareyes')
     expect(navigateMock).toHaveBeenCalledWith('/dashboard')
   })
 
@@ -79,7 +96,7 @@ describe('auth forms', () => {
     expect(navigateMock).not.toHaveBeenCalled()
   })
 
-  it('redirects to the dashboard after valid sign up input', async () => {
+  it('redirects to sign in after valid sign up input', async () => {
     const user = userEvent.setup()
 
     renderWithProviders(<SignUpPage />)
@@ -93,6 +110,6 @@ describe('auth forms', () => {
     )
     await user.click(screen.getByRole('button', { name: /create account/i }))
 
-    expect(navigateMock).toHaveBeenCalledWith('/dashboard')
+    expect(navigateMock).toHaveBeenCalledWith('/auth/signin')
   })
 })

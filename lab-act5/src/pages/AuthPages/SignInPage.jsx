@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { Alert, Button, Stack, TextField, Typography } from '@mui/material'
-import { Link as RouterLink, useNavigate } from 'react-router-dom'
-
-const emailPattern = /\S+@\S+\.\S+/
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'
+import { authenticateLocalUser, saveLocalSession } from '../../auth/localAuth'
 
 function SignInPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [values, setValues] = useState({
-    email: '',
+    login: '',
     password: '',
   })
   const [errors, setErrors] = useState({})
@@ -31,14 +31,16 @@ function SignInPage() {
   const validate = () => {
     const nextErrors = {}
 
-    if (!values.email.trim()) {
-      nextErrors.email = 'Email is required.'
-    } else if (!emailPattern.test(values.email)) {
-      nextErrors.email = 'Enter a valid email address.'
+    if (!values.login.trim()) {
+      nextErrors.login = 'Username or email is required.'
+    } else if (/\s/.test(values.login)) {
+      nextErrors.login = 'Username must not contain spaces.'
     }
 
     if (!values.password.trim()) {
       nextErrors.password = 'Password is required.'
+    } else if (values.password.length < 8) {
+      nextErrors.password = 'Password must be at least 8 characters.'
     }
 
     return nextErrors
@@ -52,33 +54,39 @@ function SignInPage() {
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
       setFormMessage(
-        nextErrors.email === 'Enter a valid email address.'
-          ? 'Provide a valid email address to continue.'
-          : 'Enter your email and password to continue.',
+        nextErrors.login === 'Username must not contain spaces.'
+          ? 'Username must not contain spaces.'
+          : 'Enter your username/email and password to continue.',
       )
       return
     }
 
-    navigate('/dashboard')
+    const result = authenticateLocalUser(values)
+
+    if (!result.ok) {
+      setFormMessage(result.message)
+      return
+    }
+
+    saveLocalSession(result.user)
+    navigate(location.state?.from?.pathname || '/dashboard')
   }
 
   return (
     <Stack component="form" spacing={2.5} onSubmit={handleSubmit} noValidate>
       <Typography color="text.secondary">
-        Sign in with a valid email and a non-empty password to access the
-        dashboard routes.
+        Use your username or email to pick up where you left off.
       </Typography>
 
       {formMessage ? <Alert severity="warning">{formMessage}</Alert> : null}
 
       <TextField
-        label="Email"
-        type="email"
+        label="Username or Email"
         fullWidth
-        value={values.email}
-        onChange={handleChange('email')}
-        error={Boolean(errors.email)}
-        helperText={errors.email || ' '}
+        value={values.login}
+        onChange={handleChange('login')}
+        error={Boolean(errors.login)}
+        helperText={errors.login || 'Use your assigned account credentials.'}
       />
       <TextField
         label="Password"

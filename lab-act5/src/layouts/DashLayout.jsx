@@ -22,6 +22,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import PeopleIcon from '@mui/icons-material/People'
 import SearchIcon from '@mui/icons-material/Search'
 import { Link as RouterLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { clearLocalSession } from '../auth/localAuth'
 
 const drawerWidth = 240
 
@@ -167,7 +168,8 @@ function DashLayout() {
   }
 
   const handleLogout = () => {
-    navigate('/')
+    clearLocalSession()
+    navigate('/auth/signin')
   }
 
   return (

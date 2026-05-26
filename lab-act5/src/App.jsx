@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import ProtectedRoute from './auth/ProtectedRoute'
 import AuthLayout from './layouts/AuthLayout'
 import DashLayout from './layouts/DashLayout'
 import Layout from './layouts/Layout'
@@ -34,7 +35,11 @@ const routes = [
   },
   {
     path: '/dashboard',
-    element: <DashLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'reports', element: <ReportsPage /> },

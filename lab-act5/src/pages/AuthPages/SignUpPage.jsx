@@ -75,14 +75,14 @@ function SignUpPage() {
       return
     }
 
-    navigate('/dashboard')
+    navigate('/auth/signin')
   }
 
   return (
     <Stack component="form" spacing={2.5} onSubmit={handleSubmit} noValidate>
       <Typography color="text.secondary">
-        Provide complete account details to continue. The form checks required
-        fields and matching passwords before redirecting to the dashboard.
+        Request access with your work email. After your details are confirmed,
+        you can sign in with an approved account.
       </Typography>
 
       {formMessage ? <Alert severity="warning">{formMessage}</Alert> : null}
