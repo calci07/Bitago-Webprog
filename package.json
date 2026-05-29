@@ -1,0 +1,11 @@
+{
+  "name": "lab-act5-workspace",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix lab-act5 run dev --",
+    "build": "npm --prefix lab-act5 run build --",
+    "lint": "npm --prefix lab-act5 run lint --",
+    "preview": "npm --prefix lab-act5 run preview --",
+    "test": "npm --prefix lab-act5 run test --"
+  }
+}
