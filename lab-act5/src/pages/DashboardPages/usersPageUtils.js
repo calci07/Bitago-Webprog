@@ -22,9 +22,11 @@ export function labelize(value) {
 export function normalizeUser(user, index = 0) {
   const firstName = String(user.firstName ?? '').trim()
   const lastName = String(user.lastName ?? '').trim()
+  const id = user._id || user.id || index + 1
 
   return {
-    id: Number(user.id) || index + 1,
+    id,
+    mongoId: user._id || user.mongoId || id,
     firstName,
     lastName,
     age: String(user.age ?? '').trim(),
@@ -55,9 +57,10 @@ export function loadUsersFromRaw(rawUsers) {
   }
 }
 
-export function validateUserForm(form) {
+export function validateUserForm(form, options = {}) {
   const nextErrors = {}
   const ageNumber = Number(form.age)
+  const requirePassword = options.requirePassword ?? true
 
   if (!String(form.firstName).trim()) nextErrors.firstName = 'First name is required.'
   if (!String(form.lastName).trim()) nextErrors.lastName = 'Last name is required.'
@@ -77,7 +80,7 @@ export function validateUserForm(form) {
   } else if (/\s/.test(String(form.username))) {
     nextErrors.username = 'Username must not contain spaces.'
   }
-  if (String(form.password).length < 8) {
+  if ((requirePassword || String(form.password).trim()) && String(form.password).length < 8) {
     nextErrors.password = 'Password must be at least 8 characters.'
   }
   if (!String(form.address).trim()) nextErrors.address = 'Address is required.'

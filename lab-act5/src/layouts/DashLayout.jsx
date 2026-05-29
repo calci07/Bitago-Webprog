@@ -15,6 +15,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { alpha, styled, useTheme } from '@mui/material/styles'
 import AssessmentIcon from '@mui/icons-material/Assessment'
+import ArticleIcon from '@mui/icons-material/Article'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import DashboardIcon from '@mui/icons-material/Dashboard'
@@ -22,7 +23,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import PeopleIcon from '@mui/icons-material/People'
 import SearchIcon from '@mui/icons-material/Search'
 import { Link as RouterLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { clearLocalSession } from '../auth/localAuth'
+import { clearLocalSession, getLocalSession } from '../auth/localAuth'
 
 const drawerWidth = 240
 
@@ -40,10 +41,18 @@ const dashboardNavItems = [
     icon: AssessmentIcon,
   },
   {
+    label: 'Articles',
+    title: 'Articles',
+    to: '/dashboard/articles',
+    icon: ArticleIcon,
+    allowedRoles: ['admin', 'editor'],
+  },
+  {
     label: 'Users',
     title: 'Users',
     to: '/dashboard/users',
     icon: PeopleIcon,
+    allowedRoles: ['admin'],
   },
 ]
 
@@ -157,6 +166,10 @@ function DashLayout() {
   const [open, setOpen] = useState(true)
   const location = useLocation()
   const navigate = useNavigate()
+  const session = getLocalSession()
+  const visibleNavItems = dashboardNavItems.filter(
+    (item) => !item.allowedRoles || item.allowedRoles.includes(session?.role),
+  )
   const pageTitle = getPageTitle(location.pathname)
 
   const handleDrawerOpen = () => {
@@ -208,7 +221,7 @@ function DashLayout() {
         </DrawerHeader>
         <Divider />
         <List>
-          {dashboardNavItems.map(({ label, to, icon: Icon }) => (
+          {visibleNavItems.map(({ label, to, icon: Icon }) => (
             <ListItem key={label} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 component={RouterLink}

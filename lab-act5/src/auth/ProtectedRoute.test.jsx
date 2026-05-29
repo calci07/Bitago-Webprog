@@ -4,19 +4,17 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import { saveLocalSession } from './localAuth'
 
-function renderProtectedDashboard() {
+function renderProtectedDashboard(routeElement = (
+  <ProtectedRoute>
+    <h1>Dashboard Area</h1>
+  </ProtectedRoute>
+)) {
   return render(
     <MemoryRouter initialEntries={['/dashboard']}>
       <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <h1>Dashboard Area</h1>
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/dashboard" element={routeElement} />
         <Route path="/auth/signin" element={<h1>Sign In Page</h1>} />
+        <Route path="/dashboard-home" element={<h1>Dashboard Home</h1>} />
       </Routes>
     </MemoryRouter>,
   )
@@ -39,5 +37,17 @@ describe('ProtectedRoute', () => {
     renderProtectedDashboard()
 
     expect(screen.getByRole('heading', { name: /dashboard area/i })).toBeInTheDocument()
+  })
+
+  it('redirects signed-in users when their role is not allowed', () => {
+    saveLocalSession({ username: 'biancacruz', role: 'editor' })
+
+    renderProtectedDashboard(
+      <ProtectedRoute allowedRoles={['admin']} redirectTo="/dashboard-home">
+        <h1>User Management</h1>
+      </ProtectedRoute>,
+    )
+
+    expect(screen.getByRole('heading', { name: /dashboard home/i })).toBeInTheDocument()
   })
 })

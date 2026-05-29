@@ -29,7 +29,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/users', userRoutes)
 app.use('/api/articles', articleRoutes)
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error(err.stack)
   res.status(500).json({ message: 'Server error.' })
 })

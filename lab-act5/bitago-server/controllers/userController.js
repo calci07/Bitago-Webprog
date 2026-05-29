@@ -7,10 +7,16 @@ function publicUser(user) {
     id: user._id,
     firstName: user.firstName,
     lastName: user.lastName,
+    age: user.age,
+    gender: user.gender,
+    contactNumber: user.contactNumber,
     email: user.email,
     role: user.role,
     username: user.username,
+    address: user.address,
     isActive: user.isActive,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
   }
 }
 

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Alert, Button, Stack, TextField, Typography } from '@mui/material'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import { saveLocalSession } from '../../auth/localAuth'
+import { registerUser } from '../../api/client'
 
 const emailPattern = /\S+@\S+\.\S+/
 
@@ -56,7 +58,7 @@ function SignUpPage() {
     return nextErrors
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const nextErrors = validate()
@@ -75,7 +77,13 @@ function SignUpPage() {
       return
     }
 
-    navigate('/auth/signin')
+    try {
+      const user = await registerUser(values)
+      saveLocalSession(user)
+      navigate('/dashboard')
+    } catch (error) {
+      setFormMessage(error.message || 'Unable to create account.')
+    }
   }
 
   return (

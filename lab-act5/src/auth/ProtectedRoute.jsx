@@ -1,11 +1,16 @@
 import { Navigate, useLocation } from 'react-router-dom'
-import { hasLocalSession } from './localAuth'
+import { getLocalSession } from './localAuth'
 
-function ProtectedRoute({ children }) {
+function ProtectedRoute({ allowedRoles, children, redirectTo = '/dashboard' }) {
   const location = useLocation()
+  const session = getLocalSession()
 
-  if (!hasLocalSession()) {
+  if (!session) {
     return <Navigate to="/auth/signin" replace state={{ from: location }} />
+  }
+
+  if (allowedRoles?.length && !allowedRoles.includes(session.role)) {
+    return <Navigate to={redirectTo} replace />
   }
 
   return children

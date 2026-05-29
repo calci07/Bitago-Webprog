@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -26,6 +26,7 @@ import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { DataGrid } from '@mui/x-data-grid'
 import usersSeed from '../../assets/users.json?raw'
+import { createUser, getUsers, updateUser } from '../../api/client'
 import {
   blankForm,
   filterUserRows,
@@ -43,7 +44,9 @@ const seed = loadUsersFromRaw(usersSeed)
 function UsersPage() {
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  const [users, setUsers] = useState(seed)
+  const [users, setUsers] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [apiError, setApiError] = useState('')
   const [query, setQuery] = useState('')
   const [filters, setFilters] = useState({ role: 'all', gender: 'all', status: 'all' })
   const [form, setForm] = useState(blankForm)
@@ -58,6 +61,50 @@ function UsersPage() {
   )
 
   const rows = useMemo(() => visibleUsers.map(tableizeUser), [visibleUsers])
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadUsers() {
+      setIsLoading(true)
+      setApiError('')
+
+      try {
+        const apiUsers = await getUsers()
+
+        if (!isMounted) return
+
+        if (apiUsers.length) {
+          setUsers(apiUsers)
+          return
+        }
+
+        const seededUsers = await Promise.all(seed.map((user) => createUser(user)))
+
+        if (isMounted) {
+          setUsers(seededUsers)
+        }
+      } catch (error) {
+        if (isMounted) {
+          setUsers(seed)
+          setApiError(
+            error.message ||
+              'Users are temporarily shown from local data because MongoDB is unavailable.',
+          )
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    loadUsers()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   const handleFilterChange = (field) => (event) => {
     setFilters((current) => ({ ...current, [field]: event.target.value }))
@@ -108,8 +155,8 @@ function UsersPage() {
     setErrors({})
   }
 
-  const saveUser = () => {
-    const nextErrors = validateUserForm(form)
+  const saveUser = async () => {
+    const nextErrors = validateUserForm(form, { requirePassword: !editingId })
 
     if (Object.keys(nextErrors).length) {
       setErrors(nextErrors)
@@ -118,26 +165,42 @@ function UsersPage() {
 
     const nextUser = normalizeUser(form)
 
-    if (editingId) {
-      setUsers((current) =>
-        current.map((user) =>
-          user.id === editingId ? { ...nextUser, id: editingId } : user,
-        ),
-      )
-    } else {
-      const nextId = Math.max(0, ...users.map((user) => user.id)) + 1
-      setUsers((current) => [...current, { ...nextUser, id: nextId }])
-    }
+    try {
+      setApiError('')
 
-    closeDialog()
+      if (editingId) {
+        const savedUser = await updateUser(editingId, nextUser)
+        setUsers((current) =>
+          current.map((user) => (user.id === editingId ? savedUser : user)),
+        )
+      } else {
+        const savedUser = await createUser(nextUser)
+        setUsers((current) => [savedUser, ...current])
+      }
+
+      closeDialog()
+    } catch (error) {
+      setApiError(error.message || 'Unable to save the user in MongoDB.')
+    }
   }
 
-  const toggleStatus = (id) => {
-    setUsers((current) =>
-      current.map((user) =>
-        user.id === id ? { ...user, isActive: !user.isActive } : user,
-      ),
-    )
+  const toggleStatus = async (id) => {
+    const user = users.find((current) => current.id === id)
+
+    if (!user) return
+
+    try {
+      setApiError('')
+      const savedUser = await updateUser(id, {
+        ...user,
+        isActive: !user.isActive,
+      })
+      setUsers((current) =>
+        current.map((currentUser) => (currentUser.id === id ? savedUser : currentUser)),
+      )
+    } catch (error) {
+      setApiError(error.message || 'Unable to update the user status in MongoDB.')
+    }
   }
 
   const columns = [
@@ -200,6 +263,12 @@ function UsersPage() {
         </Button>
       </Stack>
 
+      {apiError ? (
+        <Alert severity="warning">
+          {apiError}
+        </Alert>
+      ) : null}
+
       <Card sx={{ borderRadius: 4 }}>
         <CardContent>
           <Stack direction={{ xs: 'column', lg: 'row' }} spacing={2} sx={{ mb: 2 }}>
@@ -261,6 +330,7 @@ function UsersPage() {
             <DataGrid
               rows={rows}
               columns={columns}
+              loading={isLoading}
               disableRowSelectionOnClick
               pageSizeOptions={[5, 10]}
               initialState={{

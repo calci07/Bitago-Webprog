@@ -48,6 +48,27 @@ describe('validateUserForm', () => {
     expect(errors.password).toBe('Password must be at least 8 characters.')
     expect(errors.address).toBe('Address is required.')
   })
+
+  it('allows editing an existing user without changing the password', () => {
+    const errors = validateUserForm(
+      {
+        firstName: 'Alicia',
+        lastName: 'Reyes',
+        age: '21',
+        gender: 'female',
+        contactNumber: '09123456789',
+        email: 'alicia.reyes@example.com',
+        role: 'admin',
+        username: 'aliciareyes',
+        password: '',
+        address: 'Manila',
+        isActive: true,
+      },
+      { requirePassword: false },
+    )
+
+    expect(errors.password).toBeUndefined()
+  })
 })
 
 describe('filterUserRows', () => {

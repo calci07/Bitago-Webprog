@@ -113,7 +113,9 @@ describe('auth forms', () => {
     await user.type(screen.getByLabelText(/^password$/i), 'Alicia123!')
     await user.click(screen.getByRole('button', { name: /sign in/i }))
 
-    expect(sessionStorage.getItem('roles-webapp-session')).toContain('aliciareyes')
+    await waitFor(() => {
+      expect(sessionStorage.getItem('roles-webapp-session')).toContain('aliciareyes')
+    })
     expect(navigateMock).toHaveBeenCalledWith('/dashboard')
   })
 

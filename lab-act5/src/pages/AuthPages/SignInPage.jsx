@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Alert, Button, Stack, TextField, Typography } from '@mui/material'
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'
 import { authenticateLocalUser, saveLocalSession } from '../../auth/localAuth'
+import { loginUser } from '../../api/client'
 
 function SignInPage() {
   const navigate = useNavigate()
@@ -46,7 +47,7 @@ function SignInPage() {
     return nextErrors
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const nextErrors = validate()
@@ -59,6 +60,15 @@ function SignInPage() {
           : 'Enter your username/email and password to continue.',
       )
       return
+    }
+
+    try {
+      const result = await loginUser(values)
+      saveLocalSession(result.user)
+      navigate(location.state?.from?.pathname || '/dashboard')
+      return
+    } catch {
+      // Fall back to seeded accounts so the original demo admin can still sign in.
     }
 
     const result = authenticateLocalUser(values)
