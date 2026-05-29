@@ -1,0 +1,26 @@
+:root {
+  color-scheme: light;
+  font-family: 'Roboto', sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #eef3f8;
+}
+
+a {
+  color: inherit;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 18px;
+  font: inherit;
+}
