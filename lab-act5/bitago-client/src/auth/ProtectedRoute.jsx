@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { getLocalSession } from './localAuth'
 //labact7
+//lab-act7
 function ProtectedRoute({ allowedRoles, children, redirectTo = '/dashboard' }) {
   const location = useLocation()
   const session = getLocalSession()
