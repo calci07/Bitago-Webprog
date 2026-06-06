@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const connectDB = require('./config/db')
+const { corsOptions } = require('./config/corsOptions')
 const userRoutes = require('./routes/userRoutes')
 const articleRoutes = require('./routes/articleRoutes')
 
@@ -13,14 +14,7 @@ connectDB()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  }),
-)
+app.use(cors(corsOptions))
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'bitago-server' })
