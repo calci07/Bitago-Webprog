@@ -7,7 +7,6 @@ const userRoutes = require('./routes/userRoutes')
 const articleRoutes = require('./routes/articleRoutes')
 
 const app = express()
-const PORT = process.env.PORT || 8800
 
 connectDB()
 
@@ -22,6 +21,10 @@ app.use(
   }),
 )
 
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', service: 'bitago-server' })
+})
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'bitago-server' })
 })
@@ -33,11 +36,5 @@ app.use((err, req, res, _next) => {
   console.error(err.stack)
   res.status(500).json({ message: 'Server error.' })
 })
-
-if (process.env.VERCEL !== '1') {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-  })
-}
 
 module.exports = app
